@@ -1,0 +1,140 @@
+1.12
+Icon	Dec	Hex	ID Name	Biome	Color
+0	0	minecraft:ocean	Ocean	000070
+1	1	minecraft:plains	Plains	8DB360
+2	2	minecraft:desert	Desert	FA9418
+3	3	minecraft:extreme_hills	Extreme Hills	606060
+4	4	minecraft:forest	Forest	056621
+5	5	minecraft:taiga	Taiga	0B6659
+6	6	minecraft:swampland	Swampland	07F9B2
+7	7	minecraft:river	River	0000FF
+8	8	minecraft:hell	Hell	FF0000
+9	9	minecraft:sky	The End	8080FF
+10	A	minecraft:frozen_ocean	FrozenOcean	9090A0
+11	B	minecraft:frozen_river	FrozenRiver	A0A0FF
+12	C	minecraft:ice_flats	Ice Plains	FFFFFF
+13	D	minecraft:ice_mountains	Ice Mountains	A0A0A0
+14	E	minecraft:mushroom_island	MushroomIsland	FF00FF
+15	F	minecraft:mushroom_island_shore	MushroomIslandShore	A000FF
+16	10	minecraft:beaches	Beach	FADE55
+17	11	minecraft:desert_hills	DesertHills	D25F12
+18	12	minecraft:forest_hills	ForestHills	22551C
+19	13	minecraft:taiga_hills	TaigaHills	163933
+20	14	minecraft:smaller_extreme_hills	Extreme Hills Edge	72789A
+21	15	minecraft:jungle	Jungle	537B09
+22	16	minecraft:jungle_hills	JungleHills	2C4205
+23	17	minecraft:jungle_edge	JungleEdge	628B17
+24	18	minecraft:deep_ocean	Deep Ocean	000030
+25	19	minecraft:stone_beach	Stone Beach	A2A284
+26	1A	minecraft:cold_beach	Cold Beach	FAF0C0
+27	1B	minecraft:birch_forest	Birch Forest	307444
+28	1C	minecraft:birch_forest_hills	Birch Forest Hills	1F5F32
+29	1D	minecraft:roofed_forest	Roofed Forest	40511A
+30	1E	minecraft:taiga_cold	Cold Taiga	31554A
+31	1F	minecraft:taiga_cold_hills	Cold Taiga Hills	243F36
+32	20	minecraft:redwood_taiga	Mega Taiga	596651
+33	21	minecraft:redwood_taiga_hills	Mega Taiga Hills	545F3E
+34	22	minecraft:extreme_hills_with_trees	Extreme Hills+	507050
+35	23	minecraft:savanna	Savanna	BDB25F
+36	24	minecraft:savanna_rock	Savanna Plateau	A79D64
+37	25	minecraft:mesa	Mesa	D94515
+38	26	minecraft:mesa_rock	Mesa Plateau F	B09765
+39	27	minecraft:mesa_clear_rock	Mesa Plateau	CA8C65
+127	7F	minecraft:void	The Void	
+129	81	minecraft:mutated_plains	Sunflower Plains	B5DB88
+130	82	minecraft:mutated_desert	Desert M	FFBC40
+131	83	minecraft:mutated_extreme_hills	Extreme Hills M	888888
+132	84	minecraft:mutated_forest	Flower Forest	6A7425
+133	85	minecraft:mutated_taiga	Taiga M	596651
+134	86	minecraft:mutated_swampland	Swampland M	2FFFDA
+140	8C	minecraft:mutated_ice_flats	Ice Plains Spikes	B4DCDC
+149	95	minecraft:mutated_jungle	Jungle M	7BA331
+151	97	minecraft:mutated_jungle_edge	Jungle Edge M	8AB33F
+155	9B	minecraft:mutated_birch_forest	Birch Forest M	589C6C
+156	9C	minecraft:mutated_birch_forest_hills	Birch Forest Hills M	47875A
+157	9D	minecraft:mutated_roofed_forest	Roofed Forest M	687942
+158	9E	minecraft:mutated_taiga_cold	Cold Taiga M	597D72
+160	A0	minecraft:mutated_redwood_taiga	Mega Spruce Taiga	6B5F4C
+161	A1	minecraft:mutated_redwood_taiga_hills	Redwood Taiga Hills M	6D7766
+162	A2	minecraft:mutated_extreme_hills_with_trees	Extreme Hills+ M	789878
+163	A3	minecraft:mutated_savanna	Savanna M	E5DA87
+164	A4	minecraft:mutated_savanna_rock	Savanna Plateau M	CFC58C
+165	A5	minecraft:mutated_mesa	Mesa (Bryce)	FF6D3D
+166	A6	minecraft:mutated_mesa	Mesa Plateau F M	D8BF8D
+167	A7	minecraft:mutated_mesa_rock	Mesa Plateau M	F2B48D
+
+1.13
+Icon	Dec	Hex	ID Name	Biome	Color
+168	A8	minecraft:ocean	Ocean	
+169	A9	minecraft:plains	Plains	
+170	AA	minecraft:desert	Desert	
+171	AB	minecraft:mountains	Mountains	
+172	AC	minecraft:forest	Forest	
+173	AD	minecraft:taiga	Taiga	
+174	AE	minecraft:swamp	Swamp	
+175	AF	minecraft:river	River	
+176	B0	minecraft:nether	Nether	
+177	B1	minecraft:the_end	The End	
+178	B2	minecraft:frozen_ocean	Frozen Ocean	
+179	B3	minecraft:frozen_river	Frozen River	
+180	B4	minecraft:snowy_tundra	Snowy Tundra	
+181	B5	minecraft:snowy_mountains	Snowy Mountains	
+182	B6	minecraft:mushroom_fields	Mushroom Fields	
+183	B7	minecraft:mushroom_field_shore	Mushroom Field Shore	
+184	B8	minecraft:beach	Beach	
+185	B9	minecraft:desert_hills	Desert Hills	
+186	BA	minecraft:wooded_hills	Wooded Hills	
+187	BB	minecraft:taiga_hills	Taiga Hills	
+188	BC	minecraft:mountain_edge	Mountain Edge	
+189	BD	minecraft:jungle	Jungle	
+190	BE	minecraft:jungle_hills	Jungle Hills	
+191	BF	minecraft:jungle_edge	Jungle Edge	
+192	C0	minecraft:deep_ocean	Deep Ocean	
+193	C1	minecraft:stone_shore	Stone Shore	
+194	C2	minecraft:snowy_beach	Snowy Beach	
+195	C3	minecraft:birch_forest	Birch Forest	
+196	C4	minecraft:birch_forest_hills	Birch Forest Hills	
+197	C5	minecraft:dark_forest	Dark Forest	
+198	C6	minecraft:snowy_taiga	Snowy Taiga	
+199	C7	minecraft:snowy_taiga_hills	Snowy Taiga Hills	
+200	C8	minecraft:giant_tree_taiga	Giant Tree Taiga	
+201	C9	minecraft:giant_tree_taiga_hills	Giant Tree Taiga Hills	
+202	CA	minecraft:wooded_mountains	Wooded Mountains	
+203	CB	minecraft:savanna	Savanna	
+204	CC	minecraft:savanna_plateau	Savanna Plateau	
+205	CD	minecraft:badlands	Badlands	
+206	CE	minecraft:wooded_badlands_plateau	Wooded Badlands Plateau	
+207	CF	minecraft:badlands_plateau	Badlands Plateau	
+208	D0	minecraft:small_end_islands	Small End Islands	
+209	D1	minecraft:end_midlands	End Midlands	
+210	D2	minecraft:end_highlands	End Highlands	
+211	D3	minecraft:end_barrens	End Barrens	
+212	D4	minecraft:warm_ocean	Warm Ocean	
+213	D5	minecraft:lukewarm_ocean	Lukewarm Ocean	
+214	D6	minecraft:cold_ocean	Cold Ocean	
+215	D7	minecraft:deep_warm_ocean	Deep Warm Ocean	
+216	D8	minecraft:deep_lukewarm_ocean	Deep Lukewarm Ocean	
+217	D9	minecraft:deep_cold_ocean	Deep Cold Ocean	
+218	DA	minecraft:deep_frozen_ocean	Deep Frozen Ocean	
+127	7F	minecraft:the_void	The Void	
+129	81	minecraft:sunflower_plains	Sunflower Plains	
+130	82	minecraft:desert_lakes	Desert Lakes	
+131	83	minecraft:gravelly_mountains	Gravelly Mountains	
+132	84	minecraft:flower_forest	Flower Forest	
+133	85	minecraft:taiga_mountains	Taiga Mountains	
+134	86	minecraft:swamp_hills	Swamp Hills	
+140	8C	minecraft:ice_spikes	Ice Spikes	
+149	95	minecraft:modified_jungle	Modified Jungle	
+151	97	minecraft:modified_jungle_edge	Modified Jungle Edge	
+155	9B	minecraft:tall_birch_forest	Tall Birch Forest	
+156	9C	minecraft:tall_birch_hills	Tall Birch Hills	
+157	9D	minecraft:dark_forest_hills	Dark Forest Hills	
+158	9E	minecraft:snowy_taiga_mountains	Snowy Taiga Mountains	
+160	A0	minecraft:giant_spruce_taiga	Giant Spruce Taiga	
+161	A1	minecraft:giant_spruce_taiga_hills	Giant Spruce Taiga Hills	
+162	A2	minecraft:modified_gravelly_mountains	Gravelly Mountains+	
+163	A3	minecraft:shattered_savanna	Shattered Savanna	
+164	A4	minecraft:shattered_savanna_plateau	Shattered Savanna Plateau	
+165	A5	minecraft:eroded_badlands	Eroded Badlands	
+166	A6	minecraft:modified_wooded_badlands_plateau	Modified Wooded Badlands Plateau	
+167	A7	minecraft:modified_badlands_plateau	Modified Badlands Plateau

@@ -1,0 +1,1 @@
+black red green brown blue purple cyan lightgray gray pink lime yellow lightblue magenta orange white 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 BK RD GN BN BU PR CY LG GY PK LM YW LB MA OR WH
