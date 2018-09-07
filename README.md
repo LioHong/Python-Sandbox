@@ -1,4 +1,4 @@
 # Python-Sandbox
 Version control via PyCharm
-This is all my code, under my copyright.
-Please ask for permission before using. Use at your own risk.
+Copyright to me.
+Most of these are basically functional. For files with multiple versions, usually the final version is functional.
