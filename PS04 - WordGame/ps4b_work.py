@@ -1,3 +1,12 @@
+"""
+Name: ps4b_work
+Date: 20181006
+Author: Lio Hong
+Purpose: Automate a function to play the previous word game.
+Comments:
+
+"""
+
 from ps4a_work import *
 import time
 
@@ -123,11 +132,107 @@ def playGame(wordList):
     4) After the computer or user has played the hand, repeat from step 1
 
     wordList: list (string)
-    """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
 
-        
+    Ideal length: 15-20 lines
+    Mine: 27 lines
+    """
+    # IDK if I have to keep a copy, but I'll do so for now.
+    # Declare initial variables: n and hand 
+    # Setup while-loop for game to keep running
+        # First round of decisions that determines the hand or exit
+        # n: new hand
+            # Second round of decision: User or Computer?
+            # u: Let user play game with playHand()
+            # c: Let computer play game with compPlayHand()
+            # Invalid: Try again
+        # r: replay hand
+            # Second round of decision: User or Computer?
+            # u: Let user play game with playHand()
+            # c: Let computer play game with compPlayHand()
+            # Invalid: Try again
+        # e: exit
+        # Invalid: Try again
+
+    # Declare initial variables: n and hand
+    n = 7
+    hand = {}
+    
+    # Setup while-loop for game to keep running
+    while True:
+        # First round of decisions that determines the hand or exit
+        choice = input('Game start. Do you want a new hand (n), a replayed hand (r) or to exit (e)? ')    
+        # n: new hand
+        if choice == 'n':
+            hand = dealHand(n)
+            handRound = hand.copy() 
+            # Second round of decision: User or Computer?
+            choice2 = input('User (u) or Computer (c)? ')
+            # u: Let user play game with playHand()
+            if choice2 == 'u':
+                playHand(handRound, wordList, n)
+            # c: Let computer play game with compPlayHand()
+            elif choice2 == 'c':
+                compPlayHand(handRound, wordList, n)
+            # Invalid: Try again
+            else:
+                print('Invalid input. Try again.')
+        # r: replay hand
+        elif choice == 'r' and hand == {}:
+            print('You have not played a hand yet. Please play a new hand first!')
+        elif choice == 'r':
+            handRound = hand.copy()
+            # Second round of decision: User or Computer?
+            choice2 = input('User (u) or Computer (c)? ')
+            # u: Let user play game with playHand()
+            if choice2 == 'u':
+                playHand(handRound, wordList, n)
+            # c: Let computer play game with compPlayHand()
+            elif choice2 == 'c':
+                compPlayHand(handRound, wordList, n)
+            # Invalid: Try again
+            else:
+                print('Invalid input. Try again.')
+        # e: exit
+        elif choice == 'e':
+            break
+        # Invalid: Try again
+        else:
+            print('Invalid input. Try again.')
+                
+    print('Game Over.')
+
+def playGame2(wordList):
+    n = 7
+    hand = {}
+    while True:
+        choice = input('Game start. Do you want a new hand (n), a replayed hand (r) or to exit (e)? ')    
+        if choice == 'n':
+            hand = dealHand(n)
+            handRound = hand.copy() 
+            choice2 = input('User (u) or Computer (c)? ')
+            if choice2 == 'u':
+                playHand(handRound, wordList, n)
+            elif choice2 == 'c':
+                compPlayHand(handRound, wordList, n)
+            else:
+                print('Invalid input. Try again.')
+        elif choice == 'r' and hand == {}:
+            print('You have not played a hand yet. Please play a new hand first!')
+        elif choice == 'r':
+            handRound = hand.copy()
+            choice2 = input('User (u) or Computer (c)? ')
+            if choice2 == 'u':
+                playHand(handRound, wordList, n)
+            elif choice2 == 'c':
+                compPlayHand(handRound, wordList, n)
+            else:
+                print('Invalid input. Try again.')
+        elif choice == 'e':
+            break
+        else:
+            print('Invalid input. Try again.')                
+    print('Game Over.')
+
 #
 # Build data structures used for entire session and play game
 #
