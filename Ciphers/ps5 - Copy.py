@@ -64,7 +64,6 @@ def get_story_string():
     f.close()
     return story
 
-
 WORDLIST_FILENAME = 'words.txt'
 
 class Message(object):
