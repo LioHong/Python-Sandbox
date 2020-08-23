@@ -20,3 +20,12 @@ CRYPTOGRAPHY
 Random substitution cipher generator
 
 (WIP) Letter frequency finder
+
+BREEDING GAME
+Simulating life to better understand genetic principles
+
+Creating a geneCarrier class with its own genome and ability to birth daughters
+
+Added show_ancestry() to trace changes over generations.
+
+Added mutations and sexual reproduction.
