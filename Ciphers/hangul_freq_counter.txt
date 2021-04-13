@@ -1,0 +1,20 @@
+The precomposed hangul syllables in the Hangul Syllables block in Unicode are algorithmically defined, using the following formula:
+
+[(initial) × 588 + (medial) × 28 + (final)] + 44032
+Initial consonants (18)ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ
+Medial vowels (20)ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ
+Final consonants (27) noneㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ
+
+For example, if one wants to find the code point of "한" in Unicode:
+
+The value of initial consonant ㅎ is 18.The value of medial vowel ㅏ is 0.The value of final consonant ㄴ is 4.
+
+Substituting these values to the formula above, one gets [(18 × 588) + (0 × 28) + 4] + 44032 = 54620. This means that the Unicode value of 한 is 54620 in decimal, &#54620;by the numeric character reference, and U+D55C in hexadecimal Unicode notation.
+
+A written language like Hangul, but also able to incorporate unknown phonemes in the future, if not construct them. 
+
+How do you read phrases in languages that don't use spaces between words? 
+Hangul, Japanese, Vietnamese
+Chinese kind of
+
+Stroke frequency counter for Hangul -> DONE
