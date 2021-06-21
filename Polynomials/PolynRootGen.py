@@ -133,43 +133,38 @@ def testCompr():
 
     return term
 
-def combGen(n,r):
+def combGen(n):
 #Generates combinations in the form C(n,r), where n is # of terms
 #and r is # of choices
     blankList = [0 for a in range(n)]
     #Without the index included, flipList is created as another ref to blankList
     #instead of duplicating blankList
 
-    for b in range(r):
+    for b in range(2):
         if b == 0:
             onesList = walker(blankList)
-            listPrint(onesList)
+            for i in onesList:
+                print(i)
 
         else:
-            #Increases number of 1s in list
-            flipList = blankList[:]
-            for k in range(b):
-                flipList[k] = 1
-            refList = flipList[:]
-
-
-
-            for c in range(b,n):
+            for jList in onesList:
+                print(jList)
                 countTrun = 0
-                while countTrun < 1:
-                    trunList = flipList[c:]
-                    print('=====')
-                    try:
-                        trunList.index(1)
-                    except:
-                        twosList = walker(trunList)
-                        for d in range(len(twosList)):
-                            twosList[d] = flipList[:c] + twosList[d]
-                        listPrint(twosList)
-                        countTrun += 1
-                    finally:
-                        print('countTrun = ' + str(countTrun))
-
+                for e in range(1,len(i)):
+                    while countTrun < 1:
+                        trunList = jList[e:]
+                        print(trunList)
+                        try:
+                            trunList.index(1)
+                        except:
+                            twosList = walker(trunList)
+                            for d in range(len(twosList)):
+                                twosList[d] = jList[:e] + twosList[d]
+                            for i in twosList:
+                                print(i)
+                            countTrun += 1
+                        finally:
+                            print('countTrun = ' + str(countTrun))
 
 def walker(testList):
 #Where testList is a list full of 0s
@@ -184,9 +179,6 @@ def walker(testList):
         nestedList.append(flipList)
     return nestedList
 
-def listPrint(testList):
-    for b in range(len(testList)):
-        print(testList[b])
 
     '''
         else:
