@@ -22,16 +22,29 @@ def RootReader():
                 counta += 1
 
             else:
-                for j in range(2, 7):
-                    if factors[i + j] == 'n':
-                        roots[0][counta] = float(factors[(i + 1):(i + j)])
-                        counta += 1
-            # This loop traverse the entire string,
-            # so when it reaches the end it exceeds the index
+                countn = 1
+                while factors[i + countn] != 'n':
+                    countn += 1
+                # Rmb that a while loop is used for unknown
+                # num of iterations
+                print('i is ' + str(i))
+                print(countn)
+                roots[0][counta] = float(factors[(i + 1):(i + countn)])
+                counta += 1
 
+        '''if factors[i] == ')':
+              if factors[i+1] == 'n':
+                    roots[0][counta] = 1
+                    counta += 1
 
-        elif factors[i] == ')':
-            roots[1][countb] = float(factors[i - 1])
-            countb += 1
+              else:
+                    countn = 1
+                    while factors[i+countn] != 'n':
+                          countn += 1
+                    #Rmb that a while loop is used for unknown
+                    #num of iterations
+
+                    roots[0][counta] = float(factors[(i+1):(i+countn)])
+                    counta += 1'''
 
     print(roots)

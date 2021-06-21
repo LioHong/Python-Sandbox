@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ac26250-2ee0-4006-9207-eaed18ff5959" name="Default" comment="Test">
-      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polynomials/DifferenceEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polynomials/PolynRootGen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polynomials/PolynRootGen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +12,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="815">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="842">
+              <caret line="149" selection-start-line="149" selection-end-line="149" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="842">
+              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-end-line="50" />
             </state>
           </provider>
         </entry>
@@ -45,6 +58,7 @@
         <option value="$PROJECT_DIR$/Slime/spawnBooster02.py" />
         <option value="$PROJECT_DIR$/multiple-arraylinks.py" />
         <option value="$PROJECT_DIR$/Polynomials/DifferenceEngine.py" />
+        <option value="$PROJECT_DIR$/Polynomials/PolynRootGen.py" />
       </list>
     </option>
   </component>
@@ -177,6 +191,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" x="217" y="178" width="346" height="712" id="Project" order="0" sideWeight="0.62770563" visible="true" weight="0.12954186" />
       <window_info id="Structure" order="1" sideWeight="0.32306057" side_tool="true" weight="0.1296875" />
@@ -290,10 +305,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="7" lean-forward="true" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="14" lean-forward="true" selection-end-line="149" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="842">
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynomialGen.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" lean-forward="true" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen16.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" lean-forward="true" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>
