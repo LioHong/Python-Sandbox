@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ac26250-2ee0-4006-9207-eaed18ff5959" name="Default" comment="Test" />
+    <list default="true" id="1ac26250-2ee0-4006-9207-eaed18ff5959" name="Default" comment="Test">
+      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polynomials/DifferenceEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polynomials/DifferenceEngine3.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +19,11 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="815">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -70,7 +81,7 @@
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../GitHub" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -167,7 +178,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" x="217" y="178" width="346" height="712" id="Project" order="0" sideWeight="0.62770563" visible="true" weight="0.12954186" />
+      <window_info active="true" content_ui="combo" x="217" y="178" width="346" height="712" id="Project" order="0" sideWeight="0.62770563" visible="true" weight="0.12954186" />
       <window_info id="Structure" order="1" sideWeight="0.32306057" side_tool="true" weight="0.1296875" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Version Control" order="3" sideWeight="0.37229437" side_tool="true" visible="true" weight="0.12954186" />
@@ -178,7 +189,7 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="7" visible="true" weight="0.34218916" />
+      <window_info anchor="bottom" id="Python Console" order="7" visible="true" weight="0.34218916" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32943678" />
       <window_info anchor="right" id="R Packages" order="0" />
       <window_info anchor="right" id="R Graphics" order="1" />
@@ -265,5 +276,26 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
     <entry file="file://$PROJECT_DIR$/multiple-arraylinks.py" />
     <entry file="file://$PROJECT_DIR$/multiple_arraylinks.py" />
+    <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="15" lean-forward="true" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/DifferenceEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="815">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
