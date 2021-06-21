@@ -103,28 +103,31 @@ def reflectList(lst):
 
     return reflect
 
-def crossMult(lst,lstMul,lstMulR):
+def crossMult(lst,lstMul,length):
 #Testing how compress() works with both COEF and CONST lists
 #And produce a term from multiplying the entries of the combined list
     coef = lst[0]
     const = lst[1]
+
     sel_coef = lstMul
+    lstMulR = [[] for k in range(length)]
     sel_const = lstMulR
 
-##    print(coef)
-##    print(sel_coef)
-##    print(const)
-##    print(sel_const)
+    for i in range(length):
+        for j in lstMul[i]:
+            sel_const[i].append(reflectList(j))
+
+    print(coef)
+    print(sel_coef)
+    print(const)
+    print(sel_const)
 
     term_coef = itertools.compress(coef, sel_coef)
     term_const = itertools.compress(const, sel_const)
-
     term = 1
     for i in term_coef:
-##        print(i)
         term *= i
     for j in term_const:
-##        print(j)
         term *= j
 
     return term
@@ -139,37 +142,31 @@ def comboSort(r):
         a = combo.count(1)
         sorter[a].append(combo)
 
+##    for b in sorter:
+##        print(b)
+
     return sorter
 
 def genner():
     factors = rootReader()
     roots = factors[0] #COEF and CONST
-    terms = factors[1] + 1 #Number of terms
-    sorter = comboSort(terms-1)
+    terms = factors[1] #Number of terms
+    sorter = comboSort(terms)
     sorterRflk = [[] for i in range(terms)]
-##    products = [[] for i in range(terms)]
-    products = [0 for i in range(terms)]
+    products = []
 
-    for i in sorter:
-        print(i)
+##    for i in sorter:
+##        print(i)
 
     #I actually wanted to generate this dynamically, but figured that it would be
     #more effort than it was worth, especially now I'm so close to getting this functional.
-    for i in range(terms):
-        for j in sorter[i]:
-            sorterRflk[i].append(reflectList(j))
 
-    print('===')
-    for k in sorterRflk:
-        print(k)
+##    for i in range(terms):
+##        for j in sorter[i]:
+##            products.append(crossMult(roots,j,terms)
 
-    for i in range(terms):
-        for j in range(len(sorter[i])):
-##            products[i].append(crossMult(roots,sorter[i][j],sorterRflk[i][j]))
-            products[i] += crossMult(roots,sorter[i][j],sorterRflk[i][j])
 
-    for k in products:
-        print(k)
+
 
 
 
