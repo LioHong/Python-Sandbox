@@ -4,49 +4,30 @@ def isIn(char, aStr):
     aStr: an alphabetized string
 
     returns: True if char is in aStr; False otherwise
-    Infinite loop occurs here because there is a possibility that char is
-    absent, unlike the secret number which requires only enough time to find
-    the number.
+    Recursive function
+    I couldn't make this functional for all test cases. I'll leave this for another time.
     '''
-    start = 0
-    end = len(aStr)
-    mid = int(len(aStr) / 2)
-    guess = mid
-    print(start)
-    print(mid)
-    print(end)
-    print(guess)
 
-    while char != aStr[guess]:
+    guess = len(aStr) // 2
+
+    if len(aStr) == 1:
+        return aStr == char
+
+    if len(aStr) > 1:
+        # This splits the string into two substrings, where the lesser-valued substring
+        # is also sometimes shorter in length by 1.
+        # Without guess+1, it would always be shorter.
         if char < aStr[guess]:
-            end = max(mid, guess)
-            mid = (end - start) // 2
-            guess = start + mid
-            print('left')
-            print(start)
-            print(mid)
-            print(end)
-            print(guess)
+            aStr = aStr[:guess]
+            isIn(char, aStr)
 
-        elif char > aStr[mid]:
-            start = min(mid, guess)
-            mid = (end - start) // 2
-            guess = start + mid
-            print('right')
-            print(start)
-            print(mid)
-            print(end)
-            print(guess)
+        elif char > aStr[guess]:
+            aStr = aStr[guess:]
+            isIn(char, aStr)
 
-        elif guess == 0:
-            print('ZeroError')
-            break
+        elif char == aStr[guess]:
+            return aStr[guess] == char
+    # This was the final case that eluded me.
 
-        else:
-            break
-
-    if char == aStr[guess]:
-        return True
-
-    elif len(aStr) == 1:
-        return False
+    # Interestingly any output here will be repeated for each recursion of
+    # the function i.e. print

@@ -1,4 +1,5 @@
-import random 
+import random
+
 
 class Hand(object):
     def __init__(self, n):
@@ -24,15 +25,15 @@ class Hand(object):
 
         # Build the hand
         numVowels = self.HAND_SIZE // 3
-    
+
         for i in range(numVowels):
-            x = self.VOWELS[random.randrange(0,len(self.VOWELS))]
+            x = self.VOWELS[random.randrange(0, len(self.VOWELS))]
             self.hand[x] = self.hand.get(x, 0) + 1
-        
-        for i in range(numVowels, self.HAND_SIZE):    
-            x = self.CONSONANTS[random.randrange(0,len(self.CONSONANTS))]
+
+        for i in range(numVowels, self.HAND_SIZE):
+            x = self.CONSONANTS[random.randrange(0, len(self.CONSONANTS))]
             self.hand[x] = self.hand.get(x, 0) + 1
-            
+
     def setDummyHand(self, handString):
         '''
         Allows you to set a dummy hand. Useful for testing your implementation.
@@ -43,11 +44,12 @@ class Hand(object):
         This method converts sets the hand attribute to a dictionary
         containing the letters of handString.
         '''
-        assert len(handString) == self.HAND_SIZE, "Length of handString ({0}) must equal length of HAND_SIZE ({1})".format(len(handString), self.HAND_SIZE)
+        assert len(
+            handString) == self.HAND_SIZE, "Length of handString ({0}) must equal length of HAND_SIZE ({1})".format(
+            len(handString), self.HAND_SIZE)
         self.hand = {}
         for char in handString:
             self.hand[char] = self.hand.get(char, 0) + 1
-
 
     def calculateLen(self):
         '''
@@ -57,28 +59,30 @@ class Hand(object):
         for k in self.hand:
             ans += self.hand[k]
         return ans
-    
+
     def __str__(self):
         '''
         Display a string representation of the hand.
+        Extract the keys and sort them.
+        Then add them based on the value corresponding to the key.
         '''
         output = ''
         hand_keys = sorted(self.hand.keys())
-##        hand_keys = self.hand.keys()
-##        hand_keys.sort()
+        ##        hand_keys = self.hand.keys()
+        ##        hand_keys.sort()
         for letter in hand_keys:
             for j in range(self.hand[letter]):
                 output += letter
         return output
 
-##    def __str__Concise(self):
-##        '''
-##        Display a string representation of the hand.
-##        '''
-##        output = ''
-##        for letter in sorted(self.hand.keys()):
-##            output += letter * self.hand[letter]
-##        return output
+    ##    def __str__Concise(self):
+    ##        '''
+    ##        Display a string representation of the hand.
+    ##        '''
+    ##        output = ''
+    ##        for letter in sorted(self.hand.keys()):
+    ##            output += letter * self.hand[letter]
+    ##        return output
 
     def update(self, word):
         """
@@ -89,50 +93,33 @@ class Hand(object):
 
         Returns True if the word was able to be made with the letter in
         the hand; False otherwise.
-        
+
         word: string
         returns: Boolean (if the word was or was not made)
         """
-        #Since strings are immutable objects, I could convert it into a list
-        #or use subslicing.
-        handList = []
-        wordList = []
+        # I'm stupid. The hand was a dict all along. I'll just do the same for the word.
+        wordDict = {}
         checkList = []
-        print(self.hand)
-        print('test')
-        
-        for letter in self.hand:
-            handList.append(letter)
-        for letter in word:
-            wordList.append(letter)
-
-        
-
-        for i in wordList:
-            if i in handList:
-                checkList.append(1)
-                handList.pop(i)
+        backup = self.hand.copy()
+        for char in word:
+            if char in wordDict:
+                wordDict[char] += 1
             else:
-                checkList.append(0)
+                wordDict[char] = wordDict.get(char, 0) + 1
 
-##        self.hand = 
+        for char in wordDict:
+            checkList.append(char in self.hand)
+            if char in self.hand:
+                self.hand[char] -= 1
 
-        print(handList)
-        print(checkList)
-        
-##        return 0 not in checkList
-        
-    def update01(self, word):
-        wordArray = []
-        
-        for letter in word:
-            if letter in self.hand:
-                wordArray.append(self.hand.find(letter))
-            
-        
+        if False not in checkList == True:
+            self.hand = backup
+
+        return False not in checkList
+
         raise NotImplementedError()
 
-    
+
 myHand = Hand(7)
 print(myHand)
 print(myHand.calculateLen())

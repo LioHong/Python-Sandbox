@@ -1,11 +1,19 @@
 def CredPay(initBal, annIntRate, mthPay):
-    while countMth < 12:
-        mthPay = mthPayRate * bal
-        mthUnpBal = bal - mthPay
-        bal = mthUnpBal * (1 + mthIntRate)
-        countMth += 1
+    '''
+    Attempting to isolate the CredPay function so I can simply call it.
+    I actually was copy-pasting the code before this...
+    I wonder if I could eventually incorporate the while loop into here.
+    I'll have to code a separate version for CredPayMin(), but it would
+    make the code much easier to read
+    BTW my docstrings are probably far too long.
+    '''
+    bal = initBal
 
-    return bal, m
+    mthIntRate = annIntRate / 12.0
+    mthUnpBal = bal - mthPay
+    bal = mthUnpBal * (1 + mthIntRate)
+
+    return bal
 
 
 def CredPayMin(initBal, annIntRate, mthPayRate):
@@ -14,16 +22,13 @@ def CredPayMin(initBal, annIntRate, mthPayRate):
     and provided test cases so it was pretty straightforward.
     '''
 
-    mthIntRate = annIntRate / 12.0
     bal = initBal
-    countMth = 0
-    finBal = bal
+    countmth = 0
 
-    while countMth < 12:
+    while countmth < 12:
         mthPay = mthPayRate * bal
-        mthUnpBal = bal - mthPay
-        bal = mthUnpBal * (1 + mthIntRate)
-        countMth += 1
+        bal = CredPay(bal, annIntRate, mthPay)
+        countmth += 1
 
     print("Remaining balance: " + str(round(bal, 2)))
 
@@ -53,16 +58,18 @@ def CredPayOff(initBal, annIntRate):
     Now solving it recursively, that's interesting.
     '''
 
-    mthIntRate = annIntRate / 12.0
     bal = initBal
     mthPay = (initBal / 12) // 10 * 10
     countGuess = 0
+    countmth = 0
 
-    while bal >= 0:
+    while bal > 0:
         bal = initBal
-        countMth = 0
+        countmth = 0
 
-        CredPay(initBal, annIntRate, mthPay)
+        while countmth < 12:
+            bal = CredPay(bal, annIntRate, mthPay)
+            countmth += 1
 
         countGuess += 1
         mthPay += 10
@@ -103,15 +110,13 @@ def CredPORec(initBal, annIntRate, mthPay=0):
     So I guess that proves that the first part CAN be recursed after all.
     '''
 
-    mthIntRate = annIntRate / 12.0
     bal = initBal
     # mthPay = (initBal / 12) // 10 * 10
     countGuess = 0
     month = 0
 
     while month < 12:
-        mthUnpBal = bal - mthPay
-        bal = mthUnpBal * (1 + mthIntRate)
+        bal = CredPay(bal, annIntRate, mthPay)
         month += 1
 
     if bal > 0:
@@ -128,11 +133,38 @@ def CredPOBi(initBal, annIntRate):
     Now I know why the first part was so easy.
     It's OK actually because they went through the maths to find an upper
     bound. Kind of. It was non-trivial, but I still have to do the search.
+
+    As usual, this took ages to get running. But the results are impressive.
+    For (320000,0.2) from CredPayOff(): 22 vs 251 guesses
+    For (999999, 0.18): 24 vs 701 guesses
+    My computer can return both values almost instantly, but apparently
+    the online tests can take longer than 30s with the iterative functions.
+
+    For some reason CredPORec() can't handle such large numbers.
     '''
 
-    mthIntRate = annIntRate / 12.0
     bal = initBal
+    mthIntRate = annIntRate / 12.0
     mthPayLow = initBal / 12.0
-    mthPayHi = initBal * (1 + mthIntRate ** 12) / 12.0
+    mthPayHi = initBal * (1 + mthIntRate) ** 12 / 12.0
     mthPayMid = mthPayLow + (mthPayHi - mthPayLow) / 2.0
     countGuess = 0
+
+    while round(bal, 2) != 0.00:
+        month = 0
+        bal = initBal
+        while month < 12:
+            bal = CredPay(bal, annIntRate, mthPayMid)
+            month += 1
+
+        if bal > 0:
+            mthPayLow = mthPayMid
+            mthPayMid = mthPayLow + (mthPayHi - mthPayLow) / 2.0
+
+        if bal < 0:
+            mthPayHi = mthPayMid
+            mthPayMid = mthPayLow + (mthPayHi - mthPayLow) / 2.0
+
+        countGuess += 1
+
+    return round(mthPayMid, 2), countGuess
