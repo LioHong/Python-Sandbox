@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Filename: breeding_game_02.py
+Filename: breeding_game_04.py
 Date created: Thu Aug  6 00:44:32 2020
 @author: Julio Hong
 Purpose: I want to breed computer programs for some reason.
@@ -13,22 +13,17 @@ import datetime as dt
 from random import seed
 from random import randint
 
-# I probably should have done 16 bits, so 4 name_parts * 4 possiblities
-naming_components = {0b00000000: 'si',
-                     0b00000001: 'ni', 0b00000010: 'ga', 0b00000011: 'po',
-                     0b00000100: 'lu', 0b00001000: 'la', 0b00001100: 'li',
-                     0b00010000: 'ra', 0b00100000: 'go', 0b00110000: 'va',
-                     0b01000000: 'to', 0b10000000: 'pa', 0b11000000: 'ri',
-                     }
-
 # Let's make worms. The phenotype will be their body segments.
 # But worms disgust me. Still their linear body plan is somewhat elegant.
 # And I'll never forget Shai'Hulud.
 # Let's try hex.
-body_segments = {0x0: '-', 0x1: '=', 0x2: '~', 0x3: '>',
-                 0x4: '@', 0x5: '#', 0x6: '$', 0x7: '+',
-                 0x8: 'b', 0x9: 'o', 0xA: 'p', 0xB: 's',
-                 0xC: 'v', 0xD: '/\\', 0xE: '[]', 0xF: '{}'}
+# For a 2D creature maybe we could use pandas? Kind of like storing each creature in a box.
+# Arguable whether it's easier to compare worm bodies or text sequences
+# But it was good practice for simulating the Central Dogma: Gene > Protein > Phenotype
+body_segments = {0x0: '-', 0x1: '—', 0x2: '=', 0x3: '○',
+                 0x4: '~', 0x5: '≈', 0x6: '¤', 0x7: '<>',
+                 0x8: 'c', 0x9: 'g', 0xA: 'o', 0xB: '÷',
+                 0xC: '→', 0xD: '↔', 0xE: '◄', 0xF: '☼'}
 head_segments = {0x0: '(>_<)', 0x1: '(-_-)', 0x2: '(^_-)', 0x3: '(°_°)',
                  0x4: '(o|o)', 0x5: '(｀^´)', 0x6: '(^_^)', 0x7: '(T_T)',
                  0x8: '(?_?)', 0x9: '(*_*)', 0xA: '(・∀・)', 0xB: '(°◇°)',
@@ -36,15 +31,19 @@ head_segments = {0x0: '(>_<)', 0x1: '(-_-)', 0x2: '(^_-)', 0x3: '(°_°)',
 
 
 class geneCarrier:
-    def __init__(self, parent):
+    def __init__(self, parents):
         self.birthdate = dt.datetime.now()
-        self.parent = parent
-        self.genome = self.inherit_asexually()
-        self.child = None
+        self.parents = parents
+        # Number of parents determines if reproduction is asexual or sexual
+        if type(parents) == list:
+            self.genome = self.inherit_sexually()
+        else:
+            self.genome = self.inherit_asexually()
         self.body = self.grow_body()
+        self.children = []
 
     def intro(self):
-        print('I am the geneCarrier who looks like ' + self.body)
+        print('I am the geneCarrier who looks like:    ' + self.body)
 
     def announce_age(self):
         age = dt.datetime.now() - self.birthdate
@@ -69,47 +68,74 @@ class geneCarrier:
         # Add a clearly recognisable head segment
         head_protein = sum(body_proteins) % 16
         head_part = head_segments[head_protein]
-        worm_body = worm_body + head_part
+        # Add a standardised tail for clarity
+        worm_body = '—=≡' + worm_body + head_part
 
         return worm_body
 
     def inherit_asexually(self):
-        if self.parent == 'LIO':
+        if self.parents == 'LIO':
             # If I created this instance, randomly generate its genome
             seed(dt.datetime.now())
             genome = randint(0, 16 ** 8)
         else:
             # Otherwise it will inherit its genome from its parent
-            genome = self.parent.genome
+            genome = self.parents.genome
             # Introduce random mutations
             mutation_rate = randint(1, 64)
             #            threshold = 32
             threshold = 0
             #            threshold = 100
             mutated_bit = 0
+            # Number of bits to mutate could also be modular
             if mutation_rate > threshold:
                 mutated_bit = 2 ** (mutation_rate % 8)
                 # There is a 1/16 chance that no mutation will occur: When mutated_bit = 0
-            # Flip the chosen bit around
+            # Flip the chosen bit around with bitwise XOR
             genome = mutated_bit ^ genome
         return genome
+
+    def birth_daughter_asexually(self):
+        daughter = geneCarrier(parents=self)
+        self.children.append(daughter)
+        return daughter
 
     def show_ancestry(self):
         # Recursive function that stops once it hits the creator
         gc_instance = self
         ancestors = []
-        while gc_instance.parent != 'LIO':
-            ancestors.append(gc_instance.parent.body)
-            gc_instance = gc_instance.parent
-        ancestry_line = ' --> '.join(ancestors)
-        print('LIO --> ' + ancestry_line)
+        while gc_instance.parents != 'LIO':
+            ancestors.append(gc_instance.parents.body)
+            gc_instance = gc_instance.parents
+        ancestry_line = '  -->  '.join(ancestors)
+        print('LIO  -->  ' + ancestry_line)
 
 
+#    def show_children(self):
+# Input a list of worms and check if parent's attributes is same as own attributes
+# Genome and birthdate
+# Kind of backwards though
 
+#    def inherit_sexually(self):
+#        # Show each generation as a line I guess
+#        # And how to handle siblings?
+#        # Cursed thought: Can we have multiple parents?... But only in powers of 2
+#        # That would be a terrifying family tree.
 
-
-
-
+# I've heard that automatically generating variables is a bad idea but let's find out why
+number_of_variables = 10000
+pre_created_variables = [0 for num in range(number_of_variables)]
+# This automatically generates a family tree up to a desired number of generations
+pre_created_variables[0] = geneCarrier('LIO')
+latest_generation = 10
+for num in range(1, latest_generation):
+    # This creates a sequence of descendants
+    #    pre_created_variables[num] = geneCarrier(pre_created_variables[num-1])
+    # This creates siblings
+    #    pre_created_variables[num] = geneCarrier(pre_created_variables[0])
+    # A more recursive manner of creating children
+    pre_created_variables[num] = pre_created_variables[0].birth_daughter_asexually()
+pre_created_variables[latest_generation - 1].show_ancestry()
 
 
 
