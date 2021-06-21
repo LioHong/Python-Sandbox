@@ -1,5 +1,5 @@
 """
-Name: PolynRootGen13
+Name: PolynRootGen16
 Date: 20180905
 Author: Lio Hong
 Purpose: Produce a polynomial from user-inputted roots
@@ -16,8 +16,15 @@ Generate coef for each n^x term for x in range(i)
 Return final expression in linear form
 '' in table form
 
+Additional:
+X Include cheat codes for easy testing
+Allow inputting of terms in the form (an+b)^c
+Output negative coef as '- d*n' instead of '+ -d*n'
+
 Comments: It's finally done. It took two months exactly to finish this.
 Maybe a week of actual coding in total.
+If I want to link this to my difference engine, I'll have to produce a
+coefList and a powerList. powerList can be generated through reverse-traversing.
 
 """
 import itertools
@@ -40,21 +47,67 @@ def genPoly():
         for j in range(len(sorter[i])):
             products[i] += crossMult(roots,sorter[i][j],sorterRflk[i][j])
 
+    powers = [0 for i in range(terms)]
+    for i in range(terms):
+        powers[i] = i
+
     printPoly(products)
+
+    return products, powers
 
 def rootReader():
 #02
-#Converts user-inputted roots into coefficient array COEF and constant array CONST
+#Converts user-inputted roots into coefficient array COEF and
+#constant array CONST
     print('This function produces a polynomial from roots ' + \
           'of the form (a*n-b).')
     factors = input('Enter your roots: ')
     countf = 0
-    #Number of factors
 
-    for h in range(len(factors)):
-        if factors[h] == '(':
-            countf += 1
+    #Cheat codes. Might eventually generalise this, but I don't think
+    #I'll use so many cheats anyway.
+    if factors == 'cheat1^10':
+        print('Input: (n+1)^10')
+        countf = 10
+        roots = cheatPow(countf)
 
+    elif factors == 'cheat1-10':
+        print('Input: (n+1)(n+2)...(n+10)')
+        countf = 10
+        roots = cheatSeq(countf)
+
+    elif factors == 'cheat1-2':
+        print('Input: (n+1)(n+2)')
+        countf = 2
+        roots = cheatSeq(countf)
+
+    elif factors == 'cheat1-3':
+        print('Input: (n+1)(n+2)(n+3)')
+        countf = 3
+        roots = cheatSeq(countf)
+
+##    elif factors == '':
+
+    else:
+        #Number of factors
+        for h in range(len(factors)):
+            if factors[h] == '(':
+                countf += 1
+
+        roots = rootExtract(factors,countf)
+
+    return roots, countf
+
+def cheatSeq(num):
+    roots = [[1 for i in range(1,num+1)],[float(i) for i in range(1,num+1)]]
+    return roots
+
+def cheatPow(num):
+    roots = [[1 for i in range(num)],[1.0 for i in range(num)]]
+    return roots
+
+def rootExtract(factors,countf):
+#08
     roots = [[0 for i in range(countf)] for i in range(2)]
     counta = 0
     countb = 0
@@ -101,7 +154,7 @@ def rootReader():
                     roots[1][countb] = float(factors[(i + countnb + 1):i])
                     countb += 1
 
-    return roots, countf
+    return roots
 
 def randList():
 #03
@@ -162,6 +215,7 @@ def comboSort(r):
     return sorter
 
 def printPoly(lst):
+#07
 #Prodces human-readable polynomial format from coef
     termMax = len(lst)
     result = []
@@ -195,17 +249,3 @@ def printPoly(lst):
         resultInv[j] = result[-j-1]
 
     print('Result: ' + ' + '.join(resultInv))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
