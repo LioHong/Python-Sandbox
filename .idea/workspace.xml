@@ -25,16 +25,7 @@
         <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="842">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-end-line="50" />
+              <caret line="234" lean-forward="true" selection-start-line="234" selection-end-line="234" />
             </state>
           </provider>
         </entry>
@@ -353,10 +344,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen6.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="33" lean-forward="true" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen7.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-end-line="122" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen8.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="40" selection-end-line="230" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Polynomials/PolynRootGen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="842">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <caret line="234" lean-forward="true" selection-start-line="234" selection-end-line="234" />
         </state>
       </provider>
     </entry>
