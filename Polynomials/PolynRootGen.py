@@ -8,7 +8,8 @@ def RootReader():
         if factors[h] == '(':
             countf += 1
 
-    # Now works to 2 decimal places
+    # Now works to 3 decimal places, or a negative num to 2dp
+    # Or any int between -10,000 and 100,000
 
     roots = [[0 for i in range(countf)] for i in range(2)]
     counta = 0
@@ -16,20 +17,17 @@ def RootReader():
 
     for i in range(len(factors)):
         if factors[i] == '(':
-            for j in range(2, 6):
-                print('counta is ' + str(counta))
+            if factors[i + 1] == 'n':
+                roots[0][counta] = 1
+                counta += 1
 
-                if factors[i + 1] == 'n':
-                    print(factors[i])
-                    print(factors[i + 1])
-                    roots[0][counta] = 1
-                    counta += 1
-                    print('N-d')
-
-                elif factors[i + j] == 'n':
-                    print(j)
-                    roots[0][counta] = float(factors[(i + 1):(i + j)])
-                    counta += 1
+            else:
+                for j in range(2, 7):
+                    if factors[i + j] == 'n':
+                        roots[0][counta] = float(factors[(i + 1):(i + j)])
+                        counta += 1
+            # This loop traverse the entire string,
+            # so when it reaches the end it exceeds the index
 
 
         elif factors[i] == ')':
