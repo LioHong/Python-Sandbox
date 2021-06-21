@@ -1,6 +1,6 @@
 """
-Name: PolynRootGen8
-Date: 24-08-2018
+Name: PolynRootGen9
+Date: 20180903
 Author: Lio Hong
 Purpose: Produce a polynomial from user-inputted roots
 Took a break to better understand itertools lib.
@@ -14,10 +14,8 @@ Generate coef for each n^x term for x in range(i)
 Return final expression in linear form
 '' in table form
 """
-
-
 def RootReader():
-    # Converts user-inputted roots into coefficient array COEF and constant array CONST
+#Converts user-inputted roots into coefficient array COEF and constant array CONST
     print('This function produces a polynomial from roots ' + \
           'of the form (a*n-b).')
     factors = input('Enter your roots: ')
@@ -32,7 +30,7 @@ def RootReader():
     countb = 0
 
     for i in range(len(factors)):
-        # Produces COEF from LHS
+        #Produces COEF from LHS
         if factors[i] == '(':
             if factors[i + 1] == 'n':
                 roots[0][counta] = 1
@@ -51,7 +49,7 @@ def RootReader():
                     roots[0][counta] = float(factors[(i + 1):(i + countna)])
                     counta += 1
 
-        # Produces CONST from RHS
+        #Produces CONST from RHS
         if factors[i] == ')':
             if factors[i - 3:i - 1] == 'n+':
                 roots[1][countb] = float(factors[i - 1])
@@ -76,7 +74,6 @@ def RootReader():
     print(roots)
     return roots, countf
 
-
 '''
 Trying to produce a loop that runs through all a-values for a term
 then moves on to the next term and runs through all a-values again
@@ -87,20 +84,18 @@ Then remove the overlapping ones.
 
 listA = [0, 1, 0]
 
-
 def randList():
-    # Simple random list generator
+#Simple random list generator
     import random
     a = 5
-    dummy = [random.randint(0, 1) for i in range(a)]
-    coefff = [random.randint(0, 10) for i in range(a)]
-    consttt = [random.randint(0, 10) for i in range(a)]
+    dummy = [random.randint(0,1) for i in range(a)]
+    coefff = [random.randint(0,10) for i in range(a)]
+    consttt = [random.randint(0,10) for i in range(a)]
     return dummy, coefff, consttt
 
-
 def reflectList():
-    # Produces list that has opposite entries of input
-    # (1,0,1) -> (0,1,0)
+#Produces list that has opposite entries of input
+# (1,0,1) -> (0,1,0)
     dum = randList()[0]
     dumRefl = []
     for entry in dum:
@@ -109,13 +104,13 @@ def reflectList():
         elif entry == 0:
             dumRefl.append(1)
 
+
     return dum, dumRefl
 
-
 def testCompr():
-    # Testing how compress() works with both COEF and CONST lists
-    # And produce a term from multiplying the entries of the combined list
-    # DONE
+#Testing how compress() works with both COEF and CONST lists
+#And produce a term from multiplying the entries of the combined list
+#DONE
     coef = randList()[1]
     const = randList()[2]
     ref = reflectList()
@@ -138,38 +133,53 @@ def testCompr():
 
     return term
 
+def combGen(n,r):
+#Generates combinations in the form C(n,r), where n is # of terms
+#and r is # of choices
+    blankList = [0 for a in range(n)]
+    #Without the index included, flipList is created as another ref to blankList
+    #instead of duplicating blankList
 
-def combGen(n, r):
-    # Generates combinations in the form C(n,r), where n is # of terms
-    # and r is # of choices
-    blankList = [0 for i in range(n)]
-    flipList = blankList[:]
-    # Without the index included, flipList is created as another ref to blankList
-    # instead of duplicating blankList
-    print(flipList)
-    R = r + 1
+    for b in range(r):
+        if b == 0:
+            onesList = walker(blankList)
+            listPrint(onesList)
 
-    for i in range(r):
-        if i == 0:
-            for j in range(n):
-                flipList = blankList[:]
-                flipList[j] = 1
-                print(flipList)
         else:
-            # Increases number of 1s in list
+            #Increases number of 1s in list
             flipList = blankList[:]
-            for k in range(i):
+            for k in range(b):
                 flipList[k] = 1
             refList = flipList[:]
-            print(flipList)
 
-            for l in range(i, n):
-                trunList = flipList[l:]
-                print(trunList)
+            for c in range(b,n):
+                trunList = flipList[c:]
+                print('=====')
                 try:
                     trunList.index(1)
                 except:
-                    print('value')
+                    twosList = walker(trunList)
+                    for d in range(len(twosList)):
+                        twosList[d] = flipList[:c] + twosList[d]
+                    listPrint(twosList)
+
+
+def walker(testList):
+#Where testList is a list full of 0s
+
+    flipList = testList[:]
+    p = len(testList)
+    nestedList = []
+
+    for j in range(p):
+        flipList = testList[:]
+        flipList[j] = 1
+        nestedList.append(flipList)
+    return nestedList
+
+def listPrint(testList):
+    for b in range(len(testList)):
+        print(testList[b])
 
     '''
         else:
