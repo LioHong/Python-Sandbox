@@ -22,29 +22,37 @@ def RootReader():
                 counta += 1
 
             else:
-                countn = 1
-                while factors[i + countn] != 'n':
-                    countn += 1
+                countna = 1
+                while factors[i + countna] != 'n':
+                    countna += 1
                 # Rmb that a while loop is used for unknown
                 # num of iterations
-                print('i is ' + str(i))
-                print(countn)
-                roots[0][counta] = float(factors[(i + 1):(i + countn)])
+                roots[0][counta] = float(factors[(i + 1):(i + countna)])
                 counta += 1
 
-        '''if factors[i] == ')':
-              if factors[i+1] == 'n':
-                    roots[0][counta] = 1
-                    counta += 1
+        if factors[i] == ')':
+            if factors[i - 3] == 'n' and factors[i - 2] == '+':
+                roots[1][countb] = float(factors[i - 1])
+                countb += 1
 
-              else:
-                    countn = 1
-                    while factors[i+countn] != 'n':
-                          countn += 1
-                    #Rmb that a while loop is used for unknown
-                    #num of iterations
+            elif factors[i - 3] == 'n' and factors[i - 2] == '-':
+                roots[1][countb] = -float(factors[i - 1])
+                countb += 1
 
-                    roots[0][counta] = float(factors[(i+1):(i+countn)])
-                    counta += 1'''
+            else:
+                countnb = -3
+                while factors[i + countnb] != 'n':
+                    countnb -= 1
 
-    print(roots)
+                if factors[i + countnb + 1] == '+':
+                    roots[1][countb] = float(factors[(i + countnb + 2):i])
+                    countb += 1
+                else:
+                    roots[1][countb] = float(factors[(i + countnb + 1):i])
+                    countb += 1
+
+    return roots
+
+
+def RootMul():
+    roots = RootReader()
