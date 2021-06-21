@@ -15,11 +15,35 @@ Generate coef for each n^x term for x in range(i)
       Sum sub-coefs together for n^x term
 Return final expression in linear form
 '' in table form
+
+Comments: It's finally done. It took two months exactly to finish this.
+Maybe a week of actual coding in total.
+
 """
 import itertools
 
+def genPoly():
+    factors = rootReader()
+    roots = factors[0] #COEF and CONST
+    terms = factors[1] + 1 #Number of terms
+    sorter = comboSort(terms-1)
+    sorterRflk = [[] for i in range(terms)]
+    products = [0 for i in range(terms)]
+
+    #I actually wanted to generate this dynamically, but figured that it would be
+    #more effort than it was worth, especially now I'm so close to getting this functional.
+    for i in range(terms):
+        for j in sorter[i]:
+            sorterRflk[i].append(reflectList(j))
+
+    for i in range(terms):
+        for j in range(len(sorter[i])):
+            products[i] += crossMult(roots,sorter[i][j],sorterRflk[i][j])
+
+    printPoly(products)
+
 def rootReader():
-#01
+#02
 #Converts user-inputted roots into coefficient array COEF and constant array CONST
     print('This function produces a polynomial from roots ' + \
           'of the form (a*n-b).')
@@ -80,7 +104,7 @@ def rootReader():
     return roots, countf
 
 def randList():
-#02
+#03
 #Simple random list generator
     import random
     a = 5
@@ -91,7 +115,7 @@ def randList():
 
 
 def reflectList(lst):
-#03
+#04
 #Produces list that has opposite entries of input
 # (1,0,1) -> (0,1,0)
     reflect = []
@@ -103,27 +127,20 @@ def reflectList(lst):
 
     return reflect
 
-def crossMult(lst,lstMul,length):
+def crossMult(lst,lstMul,lstMulR):
+#05
 #Testing how compress() works with both COEF and CONST lists
 #And produce a term from multiplying the entries of the combined list
+    #Reversing terms to counteract itertools.product()
+    #NVM it's needed like this for polyPrint()
     coef = lst[0]
     const = lst[1]
-
     sel_coef = lstMul
-    lstMulR = [[] for k in range(length)]
     sel_const = lstMulR
-
-    for i in range(length):
-        for j in lstMul[i]:
-            sel_const[i].append(reflectList(j))
-
-    print(coef)
-    print(sel_coef)
-    print(const)
-    print(sel_const)
 
     term_coef = itertools.compress(coef, sel_coef)
     term_const = itertools.compress(const, sel_const)
+
     term = 1
     for i in term_coef:
         term *= i
@@ -133,7 +150,7 @@ def crossMult(lst,lstMul,length):
     return term
 
 def comboSort(r):
-#05
+#06
 #Produces the number of combinations based on r
     lst = [list(i) for i in itertools.product([0, 1], repeat=r)]
 
@@ -142,43 +159,42 @@ def comboSort(r):
         a = combo.count(1)
         sorter[a].append(combo)
 
-##    for b in sorter:
-##        print(b)
-
     return sorter
 
-def genner():
-    factors = rootReader()
-    roots = factors[0] #COEF and CONST
-    terms = factors[1] #Number of terms
-    sorter = comboSort(terms)
-    sorterRflk = [[] for i in range(terms)]
-    products = []
+def printPoly(lst):
+#Prodces human-readable polynomial format from coef
+    termMax = len(lst)
+    result = []
+    resultInv = [0 for i in range(termMax)]
 
-##    for i in sorter:
-##        print(i)
+    #i refers to power
+    #lst[i] refers to coef
+    for i in range(termMax):
+        if i == 0:
+            result.append(str(lst[i]))
 
-    #I actually wanted to generate this dynamically, but figured that it would be
-    #more effort than it was worth, especially now I'm so close to getting this functional.
+        elif i == 1 and lst[i] == 1:
+            result.append('n')
 
-##    for i in range(terms):
-##        for j in sorter[i]:
-##            products.append(crossMult(roots,j,terms)
+        elif i == 1:
+            result.append(str(lst[i])+'n')
 
+        elif lst[i] == 1:
+            result.append('n^'+str(i))
 
+        elif i == -1 and lst[i] == 1:
+            result.append('-n')
 
+        elif lst[i] == -1:
+            result.append('-n^'+str(i))
 
+        else:
+            result.append(str(lst[i])+'n^'+str(i))
 
+    for j in range(termMax):
+        resultInv[j] = result[-j-1]
 
-
-
-
-
-
-
-
-
-
+    print('Result: ' + ' + '.join(resultInv))
 
 
 
