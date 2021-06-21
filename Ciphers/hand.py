@@ -1,3 +1,11 @@
+"""
+Name: hand3
+Date: 20181004
+Author: Lio Hong
+Purpose: Word game to train usage of classes.
+Comments:
+"""
+
 import random
 
 
@@ -68,21 +76,11 @@ class Hand(object):
         '''
         output = ''
         hand_keys = sorted(self.hand.keys())
-        ##        hand_keys = self.hand.keys()
-        ##        hand_keys.sort()
+
         for letter in hand_keys:
             for j in range(self.hand[letter]):
                 output += letter
         return output
-
-    ##    def __str__Concise(self):
-    ##        '''
-    ##        Display a string representation of the hand.
-    ##        '''
-    ##        output = ''
-    ##        for letter in sorted(self.hand.keys()):
-    ##            output += letter * self.hand[letter]
-    ##        return output
 
     def update(self, word):
         """
@@ -97,10 +95,10 @@ class Hand(object):
         word: string
         returns: Boolean (if the word was or was not made)
         """
-        # I'm stupid. The hand was a dict all along. I'll just do the same for the word.
         wordDict = {}
         checkList = []
         backup = self.hand.copy()
+
         for char in word:
             if char in wordDict:
                 wordDict[char] += 1
@@ -110,23 +108,36 @@ class Hand(object):
         for char in wordDict:
             checkList.append(char in self.hand)
             if char in self.hand:
-                self.hand[char] -= 1
+                self.hand[char] -= wordDict[char]
 
-        if False not in checkList == True:
+        check = False in checkList
+        if check == True:
             self.hand = backup
 
-        return False not in checkList
-
+        return not check
         raise NotImplementedError()
 
 
-myHand = Hand(7)
-print(myHand)
-print(myHand.calculateLen())
+##myHand = Hand(9)
+##print(myHand)
+##print(myHand.calculateLen())
+##
+##myHand.setDummyHand('aazzmsp')
+##print(myHand)
+##print(myHand.calculateLen())
+##
+##myHand.update('za')
+##print(myHand)
 
-myHand.setDummyHand('aazzmsp')
-print(myHand)
-print(myHand.calculateLen())
+##myHand = Hand(9)
+##myHand.setDummyHand('haramnyhm')
+##myHand.update('hair')
 
-myHand.update('za')
+myHand = Hand(30)
+myHand.setDummyHand('qqqwwweeerrrtttyyyuuuiiioooppp')
+myHand.update('typewriter')
+
 print(myHand)
+
+
+

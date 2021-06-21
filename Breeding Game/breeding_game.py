@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Filename: breeding_game_01.py
+Filename: breeding_game_02.py
 Date created: Thu Aug  6 00:44:32 2020
 @author: Julio Hong
 Purpose: I want to breed computer programs for some reason.
@@ -21,6 +21,19 @@ naming_components = {0b00000000: 'si',
                      0b01000000: 'to', 0b10000000: 'pa', 0b11000000: 'ri',
                      }
 
+# Let's make worms. The phenotype will be their body segments.
+# But worms disgust me. Still their linear body plan is somewhat elegant.
+# And I'll never forget Shai'Hulud.
+# Let's try hex.
+body_segments = {0x0: '-', 0x1: '=', 0x2: '~', 0x3: '>',
+                 0x4: '@', 0x5: '#', 0x6: '$', 0x7: '+',
+                 0x8: 'b', 0x9: 'o', 0xA: 'p', 0xB: 's',
+                 0xC: 'v', 0xD: '/\\', 0xE: '[]', 0xF: '{}'}
+head_segments = {0x0: '(>_<)', 0x1: '(-_-)', 0x2: '(^_-)', 0x3: '(°_°)',
+                 0x4: '(o|o)', 0x5: '(｀^´)', 0x6: '(^_^)', 0x7: '(T_T)',
+                 0x8: '(?_?)', 0x9: '(*_*)', 0xA: '(・∀・)', 0xB: '(°◇°)',
+                 0xC: '(UwU)', 0xD: '(OwO)', 0xE: '( ͡° ͜ʖ ͡°)', 0xF: '(╬ ಠ益ಠ)'}
+
 
 class geneCarrier:
     def __init__(self, parent):
@@ -28,40 +41,43 @@ class geneCarrier:
         self.parent = parent
         self.genome = self.inherit_asexually()
         self.child = None
-        self.name = self.christen_name()
+        self.body = self.grow_body()
 
     def intro(self):
-        print('I am the geneCarrier called ' + self.name)
+        print('I am the geneCarrier who looks like ' + self.body)
 
     def announce_age(self):
         age = dt.datetime.now() - self.birthdate
         print('I am now ' + str(age) + ' old')
 
     def reveal_genome(self):
-        print('My genome is ' + str(format(self.genome, '08b')) + '. Please handle it with care.')
+        print('My genome is ' + "0x{:08x}".format(self.genome) + '. Please handle it with care.')
 
-    def christen_name(self):
-        # This makes the name the phenotype. Maybe I'll call it true_name next time?
-        mask_01 = 0b11000000
-        mask_02 = 0b00110000
-        mask_03 = 0b00001100
-        mask_04 = 0b00000011
-        name_part_01 = mask_01 & self.genome
-        name_part_02 = mask_02 & self.genome
-        name_part_03 = mask_03 & self.genome
-        name_part_04 = mask_04 & self.genome
+    def grow_body(self):
+        # Phenotype
+        masks = [0xF0000000, 0x0F000000, 0x00F00000, 0x000F0000, 0x0000F000, 0x00000F00, 0x000000F0, 0x0000000F]
+        # Isolate each byte
+        body_genes = [mask & self.genome for mask in masks]
+        #        print("0x{:08x}".format(self.genome))
+        #        print(["0x{:08x}".format(gene) for gene in body_genes])
+        # Then shift it to the rightmost bit
+        body_proteins = [gene >> 4 * (7 - body_genes.index(gene)) for gene in body_genes]
+        #        print(["0x{:08x}".format(protein) for protein in body_proteins])
+        body_parts = [body_segments[protein] for protein in body_proteins]
+        worm_body = ''.join(body_parts)
 
-        name = naming_components[name_part_01] + \
-               naming_components[name_part_02] + \
-               naming_components[name_part_03] + \
-               naming_components[name_part_04]
-        return name.capitalize()
+        # Add a clearly recognisable head segment
+        head_protein = sum(body_proteins) % 16
+        head_part = head_segments[head_protein]
+        worm_body = worm_body + head_part
+
+        return worm_body
 
     def inherit_asexually(self):
         if self.parent == 'LIO':
             # If I created this instance, randomly generate its genome
             seed(dt.datetime.now())
-            genome = randint(0, 255)
+            genome = randint(0, 16 ** 8)
         else:
             # Otherwise it will inherit its genome from its parent
             genome = self.parent.genome
@@ -73,7 +89,7 @@ class geneCarrier:
             mutated_bit = 0
             if mutation_rate > threshold:
                 mutated_bit = 2 ** (mutation_rate % 8)
-                # There is a 1/8 chance that no mutation will occur: When mutated_bit = 0
+                # There is a 1/16 chance that no mutation will occur: When mutated_bit = 0
             # Flip the chosen bit around
             genome = mutated_bit ^ genome
         return genome
@@ -83,10 +99,26 @@ class geneCarrier:
         gc_instance = self
         ancestors = []
         while gc_instance.parent != 'LIO':
-            ancestors.append(gc_instance.parent.name)
+            ancestors.append(gc_instance.parent.body)
             gc_instance = gc_instance.parent
         ancestry_line = ' --> '.join(ancestors)
         print('LIO --> ' + ancestry_line)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

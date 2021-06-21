@@ -5,29 +5,26 @@ def isIn(char, aStr):
 
     returns: True if char is in aStr; False otherwise
     Recursive function
-    I couldn't make this functional for all test cases. I'll leave this for another time.
+    Basically just copied the answer.
+    But I did end up comparing aStr == char for the 3rd base case
+    That was bad.
     '''
 
+    # Base cases:
     guess = len(aStr) // 2
+
+    if aStr == '':
+        return False
 
     if len(aStr) == 1:
         return aStr == char
 
-    if len(aStr) > 1:
-        # This splits the string into two substrings, where the lesser-valued substring
-        # is also sometimes shorter in length by 1.
-        # Without guess+1, it would always be shorter.
-        if char < aStr[guess]:
-            aStr = aStr[:guess]
-            isIn(char, aStr)
+    if char == aStr[guess]:
+        return aStr[guess] == char
 
-        elif char > aStr[guess]:
-            aStr = aStr[guess:]
-            isIn(char, aStr)
+    # Recursion section
+    if char < aStr[guess]:
+        return isIn(char, aStr[:guess])
 
-        elif char == aStr[guess]:
-            return aStr[guess] == char
-    # This was the final case that eluded me.
-
-    # Interestingly any output here will be repeated for each recursion of
-    # the function i.e. print
+    elif char > aStr[guess]:
+        return isIn(char, aStr[guess + 1:])
