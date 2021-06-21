@@ -59,24 +59,64 @@ def RootReader():
 
 
 def RootMul():
+    '''
     roots, countf = RootReader()
-    expression = [1 for i in range(countf + 1)]
-
+    expression = [1 for i in range(countf+1)]
+    count_half = int(countf/2)
+    coef_a = [1 for i in range(count_half)]
+    coef_b = coef_a
+    #Temp array for cross-multiplying
+    '''
+    import random
+    countf = random.randint(4, 9)
+    roots = [[i for i in range(countf)] for j in range(2)]
     for i in range(countf):
-        expression[0] *= roots[0][i]
-    # n^x term
+        roots[1][i] = -roots[0][i]
 
-    for i in range(countf):
-        expression[countf] *= roots[1][i]
-    # n^0 term
+    print(roots)
+    count_half = random.randint(2, int(countf / 2))
+    print("Half count is: " + str(count_half))
 
-    return expression
+    import itertools
+    coef_a = itertools.combinations(roots[0], count_half)
+    for i in list(coef_a):
+        temp_a = i
+        print(temp_a)
+        for j in range(count_half):
+            for k in range(countf):
+                if temp_a[j] != roots[0][k]:
+                    for m in range(countf - j):
+                        temp_b = [2 for n in range(countf - j)]
+                        temp_b[m] = roots[0][k]
+                    print(temp_b)
 
 
 '''
-Although I've separated the n^x and n^0 cases, I think they can
-actually be combined under a general formula.
-Well, I'd think so but look at RootReader. I had to cover so many cases.
-Still, it was worth the effort because now the user can put in any number.
-Length and sign no longer matter, along with the special case '-n'
+Trying to produce a loop that runs through all a-values for a term
+then moves on to the next term and runs through all a-values again
+So gen all the possible combinations first.
+(Not gen directly, but have the POTENTIAL to gen them)
+Then remove the overlapping ones.
 '''
+
+listA = [0, 1, 0]
+
+def randList():
+#Simple random list generator
+      import random
+      dummy = [random.randint(0,1) for i in range(5)]
+      return dummy
+
+def reflectList():
+#Produces list that has opposite entries of input
+# (1,0,1) -> (0,1,0)
+      dum = randList()
+      dumRefl = []
+      for entry in dum:
+            if entry == 1:
+                  dumRefl.append(0)
+            elif entry == 0:
+                  dumRefl.append(1)
+
+      print(dum)
+      return dumRefl
