@@ -118,24 +118,33 @@ def testCompr():
     sel_const = ref[1]
     import itertools
 
-    print(coef)
-    print(sel_coef)
-    print(const)
-    print(sel_const)
+
 
     term_coef = itertools.compress(coef, sel_coef)
     term_const = itertools.compress(const, sel_const)
     term = 1
     for i in term_coef:
+        print(i)
         term *= i
     for j in term_const:
+        print(j)
         term *= j
+
+    print(coef)
+    print(sel_coef)
+##    for i in term_coef:
+##        print(i)
+    print(const)
+    print(sel_const)
+##    for i in term_const:
+##        print(i)
 
     return term
 
-def combGen(n):
+def twoGen(n):
 #Generates combinations in the form C(n,r), where n is # of terms
 #and r is # of choices
+#I simplified this this by setting r = 2
     blankList = [0 for a in range(n)]
     #Without the index included, flipList is created as another ref to blankList
     #instead of duplicating blankList
@@ -145,26 +154,29 @@ def combGen(n):
             onesList = walker(blankList)
             for i in onesList:
                 print(i)
+            print('=====')
 
         else:
             for jList in onesList:
-                print(jList)
-                countTrun = 0
                 for e in range(1,len(i)):
-                    while countTrun < 1:
-                        trunList = jList[e:]
-                        print(trunList)
-                        try:
-                            trunList.index(1)
-                        except:
-                            twosList = walker(trunList)
-                            for d in range(len(twosList)):
-                                twosList[d] = jList[:e] + twosList[d]
-                            for i in twosList:
-                                print(i)
-                            countTrun += 1
-                        finally:
-                            print('countTrun = ' + str(countTrun))
+                    trunList = jList[e:]
+
+                    try:
+                        trunList.index(1)
+
+                    except:
+                        twosList = walker(trunList)
+                        for d in range(len(twosList)):
+                            twosList[d] = jList[:e] + twosList[d]
+                        for i in twosList:
+                            print(i)
+                        print('=====')
+                        break
+                        #This took so long to realise
+
+                    finally:
+                        #I just want to continue the loop
+                        dummy = 0
 
 def walker(testList):
 #Where testList is a list full of 0s
@@ -179,50 +191,66 @@ def walker(testList):
         nestedList.append(flipList)
     return nestedList
 
+def walkerOne(testList):
+#Where testList is a list such that [1,0,...,0]
 
-    '''
-        else:
-            #Increases number of 1s in list
-            flipList = blankList[:]
-            for k in range(i):
-                flipList[k] = 1
-            refList = flipList[:]
+    testList[0] = 0
+    flipList = testList[:]
+    p = len(testList)
+    nestedList = []
 
-            #When r = 2, but only works when 0 comes after 1
-            a = flipList.index(0)            
-            for j in range(a,n):
-                flipList = refList[:]
-                flipList[j] = 1
-                print(flipList)
-    '''
+    for j in range(p):
+        flipList = testList[:]
+        flipList[j] = 1
+        nestedList.append(flipList)
+    return nestedList
 
-    '''
-    for i in range(R):
-        if i == 0:
-            for j in range(n):
-                flipList = blankList[:]
-                flipList[j] = 1
-                print(flipList)
-        else:
-            #Increases number of 1s in list
-            flipList = blankList[:]
-            for k in range(i):
-                flipList[k] = 1
-            print(flipList)
-    '''
+def wunners(n,r):
+#Generates a list of n entries and r ones
+    wunList = [0 for i in range(n)]
+    for j in range(r):
+        wunList[j] = 1
 
-    '''
-    #When r = 1
-    for i in range(n):
-        flipList = blankList[:]
-        flipList[i] = 1
-        print(flipList)
-    '''
+    print(wunList)
+    return wunList
 
+def wunSlicer(n,r):
+#Preparation for multiple truncation through slicing
+    ingredient = wunners(n,r)
+    score = ingredient.index(0)
+    count = 0
+    length = n
+    strips = [0 for i in range(r)]
 
+    while count < r:
+        strips[count] = [1] + [0 for i in range(length-1)]
+        count += 1
+        length -= 1
 
+    for i in strips:
+        print(i)
 
+    return strips
 
+def threeGen(n):
+#Testing the clocks
+    a = wunSlicer(n,3)
+    print('===')
+
+    indexLoc = 0
+
+    for i in range(1,len(a)+1):
+        b = walkerOne(a[-i])
+
+        try:
+            for j in b:
+                j = [a[-i-1][indexLoc]] + j
+                print(j)
+        except:
+            print('value')
+            break
+        finally:
+            print('===')
 
 
 
