@@ -1,5 +1,5 @@
 """
-Name: PolynRootGen16
+Name: PolynRootGen
 Date: 20180905
 Author: Lio Hong
 Purpose: Produce a polynomial from user-inputted roots

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Filename: breeding_game_05.py
+Filename: breeding_game.py
 Date created: Thu Aug  6 00:44:32 2020
 @author: Julio Hong
 Purpose: I want to breed computer programs for some reason.
@@ -14,8 +14,11 @@ from random import seed
 from random import randint
 from random import sample
 import numpy as np
+import pandas as pd
 from pprint import pprint
 from collections import OrderedDict
+from itertools import combinations
+
 
 # Let's make worms. The phenotype will be their body segments.
 # But worms disgust me. Still their linear body plan is somewhat elegant.
@@ -149,7 +152,32 @@ class geneCarrier:
     #        self.parents.children
 
     def inherit_sexually(self):
-        return None
+        # Inherit half the genes from one parent and the other half from the other
+        # Or 1/4 the genes from each of 4 parents
+        # Or 1/8 the genes from each of 8 parents...
+        # Of course the below code is excessive for two parents
+        # Can deal with uneven divisions by randomly allocating inheritance counts to each parent?
+        num_of_parents = len(self.parents)
+        length_of_inheritance_set = round(self.num_of_genes / num_of_parents)
+        order_of_inheritance = sample(range(0, self.num_of_genes), self.num_of_genes)
+        # Mutation could actually happen at this stage with 15 * factor
+        masks = [15 * 16 ** x for x in reversed(range(self.num_of_genes))]
+        # Decide the order to inherit gene_masks
+        reordered_masks = [masks[x] for x in order_of_inheritance]
+        new_genome = []
+
+        # Copy the selected number of genes from each parent
+        # I can't use a dict because I don't have a UUID for each GC
+        for parent in self.parents:
+            for mask in reordered_masks[:length_of_inheritance_set]:
+                new_genome.append(mask & parent.genome)
+            for entry in range(length_of_inheritance_set):
+                reordered_masks.pop(0)
+        # new_genome_hex = ["0x{:08X}".format(gene) for gene in new_genome]
+        # print(new_genome_hex)
+        new_combined_genome = sum(new_genome)
+        # print("0x{:08X}".format(new_combined_genome))
+        return new_combined_genome
 
 
 # Show each generation as a line I guess
@@ -204,7 +232,27 @@ def compare_genomes(gc_baseline, gc_others: list):
 
 #    print('The genomes have changed by these values: ' + "0x{:08X}".format(delta_genome))
 
+def pop_genosphere_breakdown(num_of_allelles, num_of_genes):
+    # different_alleles ** (#different_genes - #identical_genes) * (#different_genes C #identical_genes)
+    breakdown_table = pd.DataFrame(data=None, index=range(num_of_genes + 1), columns=['num_possibilites', 'chance'])
+    breakdown_table.index.name = 'num_identical_genes'
+    for val in range(num_of_genes + 1):
+        breakdown_table.loc[val, 'num_possibilites'] = (num_of_allelles - 1) ** (num_of_genes - val) * len(
+            list(combinations(range(num_of_genes), val)))
+    genosphere_size = num_of_allelles ** num_of_genes
+    if genosphere_size - breakdown_table['num_possibilites'].sum() != 0:
+        print('WARNING! Check the sum of possible genetic combinations!')
+        print('Deviation of ' + str(genosphere_size - breakdown_table['num_possibilites'].sum()))
+        return breakdown_table
+    else:
+        breakdown_table['chance'] = breakdown_table['num_possibilites'] / genosphere_size * 100
+        #        breakdown_table['chance'] =
+        # Find a way to present the values as 3sig fig? Seems hard
+        # Find expected number of identical genes 90% of the time
+        target_pct = 90
+        breakdown_table['cum_chance'] = breakdown_table['chance'].cumsum()
 
+        return breakdown_table
 
 
 

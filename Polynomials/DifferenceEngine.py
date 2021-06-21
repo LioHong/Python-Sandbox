@@ -1,5 +1,5 @@
 """
-Name: DifferenceEngine5
+Name: DifferenceEngine
 Date: 20180906
 Author: Lio Hong
 Purpose: Use the method of differences to find the roots of a polynomial

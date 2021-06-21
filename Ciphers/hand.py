@@ -1,5 +1,5 @@
 """
-Name: hand3
+Name: hand
 Date: 20181004
 Author: Lio Hong
 Purpose: Word game to train usage of classes.

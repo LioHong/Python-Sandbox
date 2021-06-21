@@ -1,5 +1,5 @@
 """
-Name: genPrimes2
+Name: genPrimes
 Date: 20181005
 Author: Lio Hong
 Purpose: A generator that returns primes numbers on successive calls to
