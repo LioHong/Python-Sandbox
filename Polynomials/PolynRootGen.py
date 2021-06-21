@@ -1,6 +1,6 @@
 """
-Name: PolynRootGen9
-Date: 20180903
+Name: PolynRootGen13
+Date: 20180905
 Author: Lio Hong
 Purpose: Produce a polynomial from user-inputted roots
 Took a break to better understand itertools lib.
@@ -8,18 +8,24 @@ Subtasks:
 X Process the coefficients and constants from the roots into lists
 Generate coef for each n^x term for x in range(i)
       Sort coefs by value of x
-      Generate combinations based on number of terms from COEF (and thus from CONST)
-      X Select exclusive entries from COEF and CONST lists using itertools.compress()
+      X Generate combinations based on number of terms from COEF
+      (and thus from CONST), using itertools.product()
+      X Select exclusive entries from COEF and CONST lists using
+      itertools.compress()
       Sum sub-coefs together for n^x term
 Return final expression in linear form
 '' in table form
 """
-def RootReader():
+import itertools
+
+def rootReader():
+#01
 #Converts user-inputted roots into coefficient array COEF and constant array CONST
     print('This function produces a polynomial from roots ' + \
           'of the form (a*n-b).')
     factors = input('Enter your roots: ')
     countf = 0
+    #Number of factors
 
     for h in range(len(factors)):
         if factors[h] == '(':
@@ -71,20 +77,10 @@ def RootReader():
                     roots[1][countb] = float(factors[(i + countnb + 1):i])
                     countb += 1
 
-    print(roots)
     return roots, countf
 
-'''
-Trying to produce a loop that runs through all a-values for a term
-then moves on to the next term and runs through all a-values again
-So gen all the possible combinations first.
-(Not gen directly, but have the POTENTIAL to gen them)
-Then remove the overlapping ones.
-'''
-
-listA = [0, 1, 0]
-
 def randList():
+#02
 #Simple random list generator
     import random
     a = 5
@@ -93,164 +89,95 @@ def randList():
     consttt = [random.randint(0,10) for i in range(a)]
     return dummy, coefff, consttt
 
-def reflectList():
+
+def reflectList(lst):
+#03
 #Produces list that has opposite entries of input
 # (1,0,1) -> (0,1,0)
-    dum = randList()[0]
-    dumRefl = []
-    for entry in dum:
+    reflect = []
+    for entry in lst:
         if entry == 1:
-            dumRefl.append(0)
+            reflect.append(0)
         elif entry == 0:
-            dumRefl.append(1)
+            reflect.append(1)
 
+    return reflect
 
-    return dum, dumRefl
-
-def testCompr():
+def crossMult(lst,lstMul,lstMulR):
 #Testing how compress() works with both COEF and CONST lists
 #And produce a term from multiplying the entries of the combined list
-#DONE
-    coef = randList()[1]
-    const = randList()[2]
-    ref = reflectList()
-    sel_coef = ref[0]
-    sel_const = ref[1]
-    import itertools
+    coef = lst[0]
+    const = lst[1]
+    sel_coef = lstMul
+    sel_const = lstMulR
 
-
+##    print(coef)
+##    print(sel_coef)
+##    print(const)
+##    print(sel_const)
 
     term_coef = itertools.compress(coef, sel_coef)
     term_const = itertools.compress(const, sel_const)
+
     term = 1
     for i in term_coef:
-        print(i)
+##        print(i)
         term *= i
     for j in term_const:
-        print(j)
+##        print(j)
         term *= j
-
-    print(coef)
-    print(sel_coef)
-##    for i in term_coef:
-##        print(i)
-    print(const)
-    print(sel_const)
-##    for i in term_const:
-##        print(i)
 
     return term
 
-def twoGen(n):
-#Generates combinations in the form C(n,r), where n is # of terms
-#and r is # of choices
-#I simplified this this by setting r = 2
-    blankList = [0 for a in range(n)]
-    #Without the index included, flipList is created as another ref to blankList
-    #instead of duplicating blankList
+def comboSort(r):
+#05
+#Produces the number of combinations based on r
+    lst = [list(i) for i in itertools.product([0, 1], repeat=r)]
 
-    for b in range(2):
-        if b == 0:
-            onesList = walker(blankList)
-            for i in onesList:
-                print(i)
-            print('=====')
+    sorter = [[] for i in range(len(lst[0])+1)]
+    for combo in lst:
+        a = combo.count(1)
+        sorter[a].append(combo)
 
-        else:
-            for jList in onesList:
-                for e in range(1,len(i)):
-                    trunList = jList[e:]
+    return sorter
 
-                    try:
-                        trunList.index(1)
+def genner():
+    factors = rootReader()
+    roots = factors[0] #COEF and CONST
+    terms = factors[1] + 1 #Number of terms
+    sorter = comboSort(terms-1)
+    sorterRflk = [[] for i in range(terms)]
+##    products = [[] for i in range(terms)]
+    products = [0 for i in range(terms)]
 
-                    except:
-                        twosList = walker(trunList)
-                        for d in range(len(twosList)):
-                            twosList[d] = jList[:e] + twosList[d]
-                        for i in twosList:
-                            print(i)
-                        print('=====')
-                        break
-                        #This took so long to realise
-
-                    finally:
-                        #I just want to continue the loop
-                        dummy = 0
-
-def walker(testList):
-#Where testList is a list full of 0s
-
-    flipList = testList[:]
-    p = len(testList)
-    nestedList = []
-
-    for j in range(p):
-        flipList = testList[:]
-        flipList[j] = 1
-        nestedList.append(flipList)
-    return nestedList
-
-def walkerOne(testList):
-#Where testList is a list such that [1,0,...,0]
-
-    testList[0] = 0
-    flipList = testList[:]
-    p = len(testList)
-    nestedList = []
-
-    for j in range(p):
-        flipList = testList[:]
-        flipList[j] = 1
-        nestedList.append(flipList)
-    return nestedList
-
-def wunners(n,r):
-#Generates a list of n entries and r ones
-    wunList = [0 for i in range(n)]
-    for j in range(r):
-        wunList[j] = 1
-
-    print(wunList)
-    return wunList
-
-def wunSlicer(n,r):
-#Preparation for multiple truncation through slicing
-    ingredient = wunners(n,r)
-    score = ingredient.index(0)
-    count = 0
-    length = n
-    strips = [0 for i in range(r)]
-
-    while count < r:
-        strips[count] = [1] + [0 for i in range(length-1)]
-        count += 1
-        length -= 1
-
-    for i in strips:
+    for i in sorter:
         print(i)
 
-    return strips
+    #I actually wanted to generate this dynamically, but figured that it would be
+    #more effort than it was worth, especially now I'm so close to getting this functional.
+    for i in range(terms):
+        for j in sorter[i]:
+            sorterRflk[i].append(reflectList(j))
 
-def threeGen(n):
-#Testing the clocks
-    a = wunSlicer(n,3)
     print('===')
+    for k in sorterRflk:
+        print(k)
 
-    indexLoc = 0
+    for i in range(terms):
+        for j in range(len(sorter[i])):
+##            products[i].append(crossMult(roots,sorter[i][j],sorterRflk[i][j]))
+            products[i] += crossMult(roots,sorter[i][j],sorterRflk[i][j])
 
-    for i in range(1,len(a)+1):
-        b = walkerOne(a[-i])
+    for k in products:
+        print(k)
 
-        try:
-            for j in b:
-                j = [a[-i-1][indexLoc]] + j
-                print(j)
-        except:
-            print('value')
-            break
-        finally:
-            print('===')
+
+
+
+
+
+
+
 
 
 
