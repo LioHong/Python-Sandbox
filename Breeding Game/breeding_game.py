@@ -47,6 +47,7 @@ class geneCarrier:
         self.birthdate = dt.datetime.now()
         self.parents = parents
         # Number of parents determines if reproduction is asexual or sexual
+        self.num_of_genes = 8
         if type(parents) == list:
             self.genome = self.inherit_sexually()
         else:
@@ -67,8 +68,7 @@ class geneCarrier:
     def grow_body(self):
         # Phenotype
         # I could actually generate masks up to an arbitrary number of hexbits
-        num_of_genes = 8
-        masks = [15 * 16 ** x for x in reversed(range(num_of_genes))]
+        masks = [15 * 16 ** x for x in reversed(range(self.num_of_genes))]
         #        masks = [0xF0000000, 0x0F000000, 0x00F00000, 0x000F0000, 0x0000F000, 0x00000F00, 0x000000F0, 0x0000000F]
         # Isolate each byte
         body_genes = [mask & self.genome for mask in masks]
@@ -93,7 +93,7 @@ class geneCarrier:
         if self.parents == 'LIO':
             # If I created this instance, randomly generate its genome
             seed(dt.datetime.now())
-            genome = randint(0, 16 ** 8)
+            genome = randint(0, 16 ** self.num_of_genes)
             # Include a generation parameter
             self.generation = 0
         else:
@@ -112,7 +112,7 @@ class geneCarrier:
             flip_value = randint(0, 15)
             # Number of bits to mutate could also be modular
             if mutation_rate > threshold:
-                mutated_hexbit = flip_value << (4 * (mutation_rate % 8))
+                mutated_hexbit = flip_value << (4 * (mutation_rate % self.num_of_genes))
 
             # Flip the chosen bit around with bitwise XOR
             #            print("0x{:08X}".format(mutated_hexbit))
@@ -145,15 +145,18 @@ class geneCarrier:
         for child in self.children:
             print('↳ ' + child.body)
 
+    #    def show_siblings(self):
+    #        self.parents.children
 
-#    def show_siblings(self):
-#        self.parents.children
+    def inherit_sexually(self):
+        return None
 
-#    def inherit_sexually(self):
-#        # Show each generation as a line I guess
-#        # And how to handle siblings?
-#        # Cursed thought: Can we have multiple parents?... But only in powers of 2
-#        # That would be a terrifying family tree.
+
+# Show each generation as a line I guess
+# And how to handle siblings?
+# Cursed thought: Can we have multiple parents?... But only in powers of 2
+# That would be a terrifying family tree.
+
 
 # I've heard that automatically generating variables is a bad idea but let's find out why
 number_of_variables = 10000
@@ -177,7 +180,7 @@ def compare_genomes(gc_baseline, gc_others: list):
     # I guess it'll also see how much they've changed
     # Maybe I can compare multiple geneCarriers against a single baseline
     # Is there a way to extract the number of genes from the length of the genome?
-    num_of_genes = 8
+    num_of_genes = round(gc_baseline.genome.bit_length() / 4)
     masks = [15 * 16 ** x for x in reversed(range(num_of_genes))]
     gc_baseline_genes = [mask & gc_baseline.genome for mask in masks]
     gcbase_hexgenes = ["0x{:08X}".format(mask & gc_baseline.genome) for mask in masks]
