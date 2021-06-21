@@ -152,16 +152,23 @@ def combGen(n,r):
                 flipList[k] = 1
             refList = flipList[:]
 
+
+
             for c in range(b,n):
-                trunList = flipList[c:]
-                print('=====')
-                try:
-                    trunList.index(1)
-                except:
-                    twosList = walker(trunList)
-                    for d in range(len(twosList)):
-                        twosList[d] = flipList[:c] + twosList[d]
-                    listPrint(twosList)
+                countTrun = 0
+                while countTrun < 1:
+                    trunList = flipList[c:]
+                    print('=====')
+                    try:
+                        trunList.index(1)
+                    except:
+                        twosList = walker(trunList)
+                        for d in range(len(twosList)):
+                            twosList[d] = flipList[:c] + twosList[d]
+                        listPrint(twosList)
+                        countTrun += 1
+                    finally:
+                        print('countTrun = ' + str(countTrun))
 
 
 def walker(testList):
